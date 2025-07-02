@@ -90,9 +90,12 @@ export default function OKRsContent() {
     setUserType(storedUserType)
   }, [])
 
-  const handleValidate = (approved: boolean, feedback: string) => {
+  const handleValidate = (approved: boolean, feedback: string, relevance?: number, impact?: number) => {
     // Aqui você implementaria a lógica para salvar a validação
     console.log(`OKR ${approved ? "aprovado" : "reprovado"}: ${feedback}`)
+    if (relevance && impact) {
+      console.log(`Relevância: ${relevance}, Impacto: ${impact}`)
+    }
     // Atualizar a interface após a validação
   }
 
@@ -956,7 +959,7 @@ export default function OKRsContent() {
           open={validationOpen}
           onOpenChange={setValidationOpen}
           title={currentOkr.title}
-          type="okr"
+          type="action-plan"
           onValidate={handleValidate}
         />
       )}
