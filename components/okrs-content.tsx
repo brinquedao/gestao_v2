@@ -244,6 +244,11 @@ export default function OKRsContent() {
     setFeedbackOpen(true)
   }
 
+  const handleOpenReview = (okrId: string) => {
+    // Implementar a lógica para abrir o modal de revisão e reenvio
+    console.log(`Abrir modal de revisão para OKR ${okrId}`)
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -778,7 +783,7 @@ export default function OKRsContent() {
                                 <Eye className="mr-2 h-4 w-4" />
                                 Ver feedback
                               </DropdownMenuItem>
-                              <DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handleOpenReview("leitura")}>
                                 <Edit className="mr-2 h-4 w-4" />
                                 Revisar e reenviar
                               </DropdownMenuItem>
