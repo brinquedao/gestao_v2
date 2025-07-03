@@ -170,7 +170,12 @@ export default function ActionPlansContent() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Planos de Ação</h1>
-          <p className="text-muted-foreground">Gerencie ações para atingir seus objetivos</p>
+          <p className="text-muted-foreground">
+            {userType === "gpa" 
+              ? "Acompanhe e valide planos de ação da rede" 
+              : "Gerencie ações para atingir seus objetivos"
+            }
+          </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
           {userType === "escola" && (
@@ -277,7 +282,9 @@ export default function ActionPlansContent() {
 
       <Tabs defaultValue="my-plans" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="my-plans">Meus Planos</TabsTrigger>
+          <TabsTrigger value="my-plans">
+            {userType === "gpa" ? "Planos da Rede" : "Meus Planos"}
+          </TabsTrigger>
           {userType === "escola" && (
             <TabsTrigger value="peer-validation" className="relative">
               Validação por Pares
@@ -299,7 +306,7 @@ export default function ActionPlansContent() {
                   <TableRow>
                     <TableHead className="w-[300px]">Plano de Ação</TableHead>
                     <TableHead>Responsável</TableHead>
-                    <TableHead>OKR Relacionado</TableHead>
+                    <TableHead>{userType === "gpa" ? "Escola" : "OKR Relacionado"}</TableHead>
                     <TableHead>Prazo</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead className="text-right">Ações</TableHead>
@@ -319,12 +326,12 @@ export default function ActionPlansContent() {
                       </div>
                     </TableCell>
                     <TableCell>Maria Silva</TableCell>
-                    <TableCell>Melhorar desempenho em Matemática</TableCell>
+                    <TableCell>{userType === "gpa" ? "Escola Municipal João Silva" : "Melhorar desempenho em Matemática"}</TableCell>
                     <TableCell>30/06/2024</TableCell>
                     <TableCell>
                       <div className="flex items-center">
-                        <Clock className="mr-1 h-4 w-4 text-amber-500" />
-                        <span className="text-xs">Em andamento</span>
+                        <CheckCircle2 className="mr-1 h-4 w-4 text-green-500" />
+                        <span className="text-xs">Concluído</span>
                       </div>
                     </TableCell>
                     <TableCell className="text-right">
@@ -340,35 +347,24 @@ export default function ActionPlansContent() {
                             <Eye className="mr-2 h-4 w-4" />
                             Ver detalhes
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Editar
-                          </DropdownMenuItem>
-                          {userType === "gpa" && (
+                          {userType === "gpa" ? (
+                            <DropdownMenuItem>
+                              <Star className="mr-2 h-4 w-4" />
+                              Marcar como boa prática
+                            </DropdownMenuItem>
+                          ) : (
                             <>
                               <DropdownMenuItem>
-                                <Star className="mr-2 h-4 w-4" />
-                                Marcar como boa prática
+                                <Edit className="mr-2 h-4 w-4" />
+                                Editar
                               </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => {
-                                  setCurrentPlan({
-                                    id: "programa-monitoria",
-                                    title: "Programa de monitoria em Matemática",
-                                  })
-                                  setValidationOpen(true)
-                                }}
-                              >
-                                <CheckCircle2 className="mr-2 h-4 w-4" />
-                                Validar plano
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="text-red-600">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Excluir
                               </DropdownMenuItem>
                             </>
                           )}
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-red-600">
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Excluir
-                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
@@ -377,7 +373,7 @@ export default function ActionPlansContent() {
                   <TableRow>
                     <TableCell className="font-medium">Programa de acompanhamento de frequência</TableCell>
                     <TableCell>João Santos</TableCell>
-                    <TableCell>Reduzir evasão escolar</TableCell>
+                    <TableCell>{userType === "gpa" ? "Escola Municipal Maria Santos" : "Reduzir evasão escolar"}</TableCell>
                     <TableCell>15/07/2024</TableCell>
                     <TableCell>
                       <div className="flex items-center">
@@ -398,15 +394,19 @@ export default function ActionPlansContent() {
                             <Eye className="mr-2 h-4 w-4" />
                             Ver detalhes
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Editar
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-red-600">
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Excluir
-                          </DropdownMenuItem>
+                          {userType !== "gpa" && (
+                            <>
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Editar
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="text-red-600">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Excluir
+                              </DropdownMenuItem>
+                            </>
+                          )}
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
@@ -415,7 +415,7 @@ export default function ActionPlansContent() {
                   <TableRow>
                     <TableCell className="font-medium">Reuniões bimestrais com pais</TableCell>
                     <TableCell>Ana Oliveira</TableCell>
-                    <TableCell>Aumentar participação dos pais</TableCell>
+                    <TableCell>{userType === "gpa" ? "Escola Municipal Pedro Oliveira" : "Aumentar participação dos pais"}</TableCell>
                     <TableCell>15/05/2024</TableCell>
                     <TableCell>
                       <div className="flex items-center">
@@ -436,15 +436,24 @@ export default function ActionPlansContent() {
                             <Eye className="mr-2 h-4 w-4" />
                             Ver detalhes
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Editar
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-red-600">
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Excluir
-                          </DropdownMenuItem>
+                          {userType === "gpa" ? (
+                            <DropdownMenuItem>
+                              <Star className="mr-2 h-4 w-4" />
+                              Marcar como boa prática
+                            </DropdownMenuItem>
+                          ) : (
+                            <>
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Editar
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="text-red-600">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Excluir
+                              </DropdownMenuItem>
+                            </>
+                          )}
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
@@ -453,12 +462,12 @@ export default function ActionPlansContent() {
                   <TableRow>
                     <TableCell className="font-medium">Reforço em Matemática para 7º ano</TableCell>
                     <TableCell>Carlos Mendes</TableCell>
-                    <TableCell>Melhorar desempenho em Matemática</TableCell>
+                    <TableCell>{userType === "gpa" ? "Escola Municipal José Silva" : "Melhorar desempenho em Matemática"}</TableCell>
                     <TableCell>10/06/2024</TableCell>
                     <TableCell>
                       <div className="flex items-center">
-                        <AlertCircle className="mr-1 h-4 w-4 text-red-500" />
-                        <span className="text-xs">Atrasado</span>
+                        <X className="mr-1 h-4 w-4 text-red-500" />
+                        <span className="text-xs">Reprovado por pares</span>
                       </div>
                     </TableCell>
                     <TableCell className="text-right">
@@ -474,21 +483,38 @@ export default function ActionPlansContent() {
                             <Eye className="mr-2 h-4 w-4" />
                             Ver detalhes
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Editar
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-red-600">
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Excluir
-                          </DropdownMenuItem>
+                          {userType === "gpa" ? (
+                            <DropdownMenuItem
+                              onClick={() => {
+                                setCurrentPlan({
+                                  id: "reforco-matematica",
+                                  title: "Reforço em Matemática para 7º ano",
+                                })
+                                setValidationOpen(true)
+                              }}
+                            >
+                              <CheckCircle2 className="mr-2 h-4 w-4" />
+                              Reavaliar plano
+                            </DropdownMenuItem>
+                          ) : (
+                            <>
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Editar
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="text-red-600">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Excluir
+                              </DropdownMenuItem>
+                            </>
+                          )}
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
                   </TableRow>
 
-                  {/* Plano reprovado por pares e depois pela GPA */}
+                  {/* Plano reprovado por pares e depois pela GPA - apenas para escola */}
                   {userType === "escola" && (
                     <TableRow>
                       <TableCell className="font-medium">Capacitação em metodologias ativas</TableCell>
@@ -554,7 +580,7 @@ export default function ActionPlansContent() {
                   <TableRow>
                     <TableCell className="font-medium">Sistema de acompanhamento pedagógico</TableCell>
                     <TableCell>Roberto Silva</TableCell>
-                    <TableCell>Melhorar desempenho em Matemática</TableCell>
+                    <TableCell>{userType === "gpa" ? "Escola Municipal Ana Costa" : "Melhorar desempenho em Matemática"}</TableCell>
                     <TableCell>20/07/2024</TableCell>
                     <TableCell>
                       <div className="flex items-center">
@@ -576,20 +602,22 @@ export default function ActionPlansContent() {
                             Ver detalhes
                           </DropdownMenuItem>
                           {userType === "escola" && (
-                            <DropdownMenuItem>
-                              <CheckCircle2 className="mr-2 h-4 w-4" />
-                              Avaliar plano
-                            </DropdownMenuItem>
+                            <>
+                              <DropdownMenuItem>
+                                <CheckCircle2 className="mr-2 h-4 w-4" />
+                                Avaliar plano
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Editar
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="text-red-600">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Excluir
+                              </DropdownMenuItem>
+                            </>
                           )}
-                          <DropdownMenuItem>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Editar
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-red-600">
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Excluir
-                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
