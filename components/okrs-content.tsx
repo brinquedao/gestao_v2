@@ -502,34 +502,10 @@ export default function OKRsContent() {
                         <Input id="kr-target-value" type="number" placeholder="Ex: 7.5" />
                       </div>
                     </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="kr-responsible">Responsável</Label>
-                      <Select>
-                        <SelectTrigger id="kr-responsible">
-                          <SelectValue placeholder="Selecione um responsável" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="maria">Maria Silva</SelectItem>
-                          <SelectItem value="joao">João Santos</SelectItem>
-                          <SelectItem value="ana">Ana Oliveira</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="kr-data-source">Fonte de Dados</Label>
-                      <Select>
-                        <SelectTrigger id="kr-data-source">
-                          <SelectValue placeholder="Selecione a fonte de dados" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="pesquisa">Pesquisa</SelectItem>
-                          <SelectItem value="avaliacao-interna">Avaliação Interna</SelectItem>
-                          <SelectItem value="avaliacao-externa">Avaliação Externa</SelectItem>
-                          <SelectItem value="dados-curso">Dados do Curso</SelectItem>
-                          <SelectItem value="dados-escola">Dados da Escola</SelectItem>
-                          <SelectItem value="sistema-academico">Sistema Acadêmico</SelectItem>
-                        </SelectContent>
-                      </Select>
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                      <p className="text-sm text-blue-700">
+                        <strong>Nota:</strong> O responsável e fonte de dados serão herdados do OKR principal.
+                      </p>
                     </div>
                   </div>
                   <DialogFooter>
@@ -626,7 +602,7 @@ export default function OKRsContent() {
                           </DropdownMenuItem>
                           <DropdownMenuItem>
                             <Edit className="mr-2 h-4 w-4" />
-                            Editar
+                            Atualizar
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem className="text-red-600">
@@ -716,7 +692,7 @@ export default function OKRsContent() {
                           </DropdownMenuItem>
                           <DropdownMenuItem>
                             <Edit className="mr-2 h-4 w-4" />
-                            Editar
+                            Reutilizar
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem className="text-red-600">
@@ -729,50 +705,93 @@ export default function OKRsContent() {
                   </TableRow>
 
                   {userType === "escola" && (
-                    <TableRow>
-                      <TableCell className="font-medium">Melhorar habilidades de leitura</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <div className="w-[60px]">
-                            <ColoredProgress value={0} size="sm" />
+                    <>
+                      <TableRow>
+                        <TableCell className="font-medium">Implementar programa de mentoria</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <div className="w-[60px]">
+                              <ColoredProgress value={0} size="sm" />
+                            </div>
+                            <span className="text-xs">0%</span>
                           </div>
-                          <span className="text-xs">0%</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>Carlos Mendes</TableCell>
-                      <TableCell>-</TableCell>
-                      <TableCell>
-                        <div className="flex items-center">
-                          <X className="mr-1 h-4 w-4 text-red-500" />
-                          <span className="text-xs">Reprovado</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                              <MoreHorizontal className="h-4 w-4" />
-                              <span className="sr-only">Abrir menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => handleOpenFeedback("leitura")}>
-                              <Eye className="mr-2 h-4 w-4" />
-                              Ver feedback
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <Edit className="mr-2 h-4 w-4" />
-                              Revisar e reenviar
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-red-600">
-                              <Trash2 className="mr-2 h-4 w-4" />
-                              Excluir
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
+                        </TableCell>
+                        <TableCell>Roberto Lima</TableCell>
+                        <TableCell>-</TableCell>
+                        <TableCell>
+                          <div className="flex items-center">
+                            <AlertCircle className="mr-1 h-4 w-4 text-blue-500" />
+                            <span className="text-xs">Em avaliação</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="icon">
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Abrir menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Editar
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="text-red-600">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Excluir
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+
+                      <TableRow>
+                        <TableCell className="font-medium">Melhorar habilidades de leitura</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <div className="w-[60px]">
+                              <ColoredProgress value={0} size="sm" />
+                            </div>
+                            <span className="text-xs">0%</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>Carlos Mendes</TableCell>
+                        <TableCell>-</TableCell>
+                        <TableCell>
+                          <div className="flex items-center">
+                            <X className="mr-1 h-4 w-4 text-red-500" />
+                            <span className="text-xs">Reprovado</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="icon">
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Abrir menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem onClick={() => handleOpenFeedback("leitura")}>
+                                <Eye className="mr-2 h-4 w-4" />
+                                Ver feedback
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Revisar e reenviar
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="text-red-600">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Excluir
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    </>
                   )}
 
                   {userType === "gpa" && (
@@ -828,7 +847,7 @@ export default function OKRsContent() {
         </TabsContent>
 
         <TabsContent value="board" className="space-y-4">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-4">
             <Card>
               <CardHeader className="bg-amber-50 pb-3">
                 <CardTitle className="text-amber-700">Em Andamento</CardTitle>
@@ -892,30 +911,55 @@ export default function OKRsContent() {
             </Card>
 
             {userType === "escola" && (
-              <Card>
-                <CardHeader className="bg-red-50 pb-3">
-                  <CardTitle className="text-red-700">Reprovados</CardTitle>
-                  <CardDescription>1 OKR</CardDescription>
-                </CardHeader>
-                <CardContent className="p-3">
-                  <div className="space-y-3">
-                    <div className="rounded-lg border p-3 shadow-sm">
-                      <h3 className="font-semibold">Melhorar habilidades de leitura</h3>
-                      <div className="mt-2 text-sm text-muted-foreground">
-                        <div className="flex items-center justify-between mb-1">
-                          <span>Feedback da GPA disponível</span>
+              <>
+                <Card>
+                  <CardHeader className="bg-blue-50 pb-3">
+                    <CardTitle className="text-blue-700">Em Avaliação</CardTitle>
+                    <CardDescription>1 OKR</CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-3">
+                    <div className="space-y-3">
+                      <div className="rounded-lg border p-3 shadow-sm">
+                        <h3 className="font-semibold">Implementar programa de mentoria</h3>
+                        <div className="mt-2 text-sm text-muted-foreground">
+                          <div className="flex items-center justify-between mb-1">
+                            <span>Aguardando validação da GPA</span>
+                          </div>
+                        </div>
+                        <div className="mt-3 flex items-center justify-between text-xs">
+                          <span>Roberto Lima</span>
+                          <span>Enviado: 15/05/2024</span>
                         </div>
                       </div>
-                      <div className="mt-3 flex items-center justify-between text-xs">
-                        <span>Carlos Mendes</span>
-                        <Button variant="outline" size="sm">
-                          Ver feedback
-                        </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="bg-red-50 pb-3">
+                    <CardTitle className="text-red-700">Reprovados</CardTitle>
+                    <CardDescription>1 OKR</CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-3">
+                    <div className="space-y-3">
+                      <div className="rounded-lg border p-3 shadow-sm">
+                        <h3 className="font-semibold">Melhorar habilidades de leitura</h3>
+                        <div className="mt-2 text-sm text-muted-foreground">
+                          <div className="flex items-center justify-between mb-1">
+                            <span>Feedback da GPA disponível</span>
+                          </div>
+                        </div>
+                        <div className="mt-3 flex items-center justify-between text-xs">
+                          <span>Carlos Mendes</span>
+                          <Button variant="outline" size="sm">
+                            Ver feedback
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </>
             )}
 
             {userType === "gpa" && (
