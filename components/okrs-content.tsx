@@ -603,6 +603,53 @@ export default function OKRsContent() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
+                  {userType === "escola" && (
+                    <TableRow>
+                      <TableCell className="font-medium">Melhorar habilidades de leitura</TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <div className="w-[60px]">
+                            <ColoredProgress value={0} size="sm" />
+                          </div>
+                          <span className="text-xs">0%</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>Carlos Mendes</TableCell>
+                      <TableCell>-</TableCell>
+                      <TableCell>
+                        <div className="flex items-center">
+                          <AlertTriangle className="mr-1 h-4 w-4 text-red-500" />
+                          <span className="text-xs">Reprovado</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="h-4 w-4" />
+                              <span className="sr-only">Abrir menu</span>
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => handleOpenFeedback("leitura")}>
+                              <Eye className="mr-2 h-4 w-4" />
+                              Ver feedback
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleOpenReview("leitura")}>
+                              <Edit className="mr-2 h-4 w-4" />
+                              Revisar e reenviar
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="text-red-600">
+                              <Trash2 className="mr-2 h-4 w-4" />
+                              Excluir
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  )}
+
                   <TableRow>
                     <TableCell className="font-medium">Melhorar desempenho em Matemática</TableCell>
                     <TableCell>
@@ -693,6 +740,49 @@ export default function OKRsContent() {
                     </TableCell>
                   </TableRow>
 
+                  {userType === "escola" && (
+                    <TableRow>
+                      <TableCell className="font-medium">Implementar programa de mentoria</TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <div className="w-[60px]">
+                            <ColoredProgress value={0} size="sm" />
+                          </div>
+                          <span className="text-xs">0%</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>Roberto Lima</TableCell>
+                      <TableCell>-</TableCell>
+                      <TableCell>
+                        <div className="flex items-center">
+                          <AlertCircle className="mr-1 h-4 w-4 text-blue-500" />
+                          <span className="text-xs">Em avaliação</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="h-4 w-4" />
+                              <span className="sr-only">Abrir menu</span>
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem>
+                              <Edit className="mr-2 h-4 w-4" />
+                              Editar
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="text-red-600">
+                              <Trash2 className="mr-2 h-4 w-4" />
+                              Excluir
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  )}
+
                   <TableRow>
                     <TableCell className="font-medium">Aumentar participação dos pais</TableCell>
                     <TableCell>
@@ -737,96 +827,6 @@ export default function OKRsContent() {
                       </DropdownMenu>
                     </TableCell>
                   </TableRow>
-
-                  {userType === "escola" && (
-                    <>
-                      <TableRow>
-                        <TableCell className="font-medium">Implementar programa de mentoria</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <div className="w-[60px]">
-                              <ColoredProgress value={0} size="sm" />
-                            </div>
-                            <span className="text-xs">0%</span>
-                          </div>
-                        </TableCell>
-                        <TableCell>Roberto Lima</TableCell>
-                        <TableCell>-</TableCell>
-                        <TableCell>
-                          <div className="flex items-center">
-                            <AlertCircle className="mr-1 h-4 w-4 text-blue-500" />
-                            <span className="text-xs">Em avaliação</span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="icon">
-                                <MoreHorizontal className="h-4 w-4" />
-                                <span className="sr-only">Abrir menu</span>
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuItem>
-                                <Edit className="mr-2 h-4 w-4" />
-                                Editar
-                              </DropdownMenuItem>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem className="text-red-600">
-                                <Trash2 className="mr-2 h-4 w-4" />
-                                Excluir
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-
-                      <TableRow>
-                        <TableCell className="font-medium">Melhorar habilidades de leitura</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <div className="w-[60px]">
-                              <ColoredProgress value={0} size="sm" />
-                            </div>
-                            <span className="text-xs">0%</span>
-                          </div>
-                        </TableCell>
-                        <TableCell>Carlos Mendes</TableCell>
-                        <TableCell>-</TableCell>
-                        <TableCell>
-                          <div className="flex items-center">
-                            <AlertTriangle className="mr-1 h-4 w-4 text-red-500" />
-                            <span className="text-xs">Reprovado</span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="icon">
-                                <MoreHorizontal className="h-4 w-4" />
-                                <span className="sr-only">Abrir menu</span>
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuItem onClick={() => handleOpenFeedback("leitura")}>
-                                <Eye className="mr-2 h-4 w-4" />
-                                Ver feedback
-                              </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handleOpenReview("leitura")}>
-                                <Edit className="mr-2 h-4 w-4" />
-                                Revisar e reenviar
-                              </DropdownMenuItem>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem className="text-red-600">
-                                <Trash2 className="mr-2 h-4 w-4" />
-                                Excluir
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                    </>
-                  )}
 
                   {userType === "gpa" && (
                     <TableRow>
