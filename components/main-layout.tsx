@@ -18,6 +18,7 @@ import {
   User,
   Menu,
   X,
+  Users,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -49,6 +50,10 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     { href: "/indicators", label: "Indicadores", icon: ClipboardList },
     { href: "/action-plans", label: "Planos de Ação", icon: CheckSquare },
     { href: "/best-practices", label: "Boas Práticas", icon: Lightbulb },
+  ]
+
+  const schoolMenuItems = [
+    { href: "/committees", label: "Comitês", icon: Users },
   ]
 
   const adminItems = [
@@ -97,6 +102,32 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               })}
             </div>
           </div>
+
+          {userType === "escola" && (
+            <div>
+              <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Gestão</h3>
+              <div className="mt-2 space-y-1">
+                {schoolMenuItems.map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                        isActive(item.href)
+                          ? "bg-blue-100 text-blue-700"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      }`}
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      <Icon className="mr-3 h-5 w-5" />
+                      {item.label}
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
           {userType === "gpa" && (
             <div>
