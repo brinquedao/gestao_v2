@@ -215,19 +215,6 @@ export default function ActionPlansContent() {
                     </div>
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="responsible">Responsável</Label>
-                    <Select>
-                      <SelectTrigger id="responsible">
-                        <SelectValue placeholder="Selecione um responsável" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="maria">Maria Silva</SelectItem>
-                        <SelectItem value="joao">João Santos</SelectItem>
-                        <SelectItem value="ana">Ana Oliveira</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-2">
                     <Label htmlFor="okr">OKR Relacionado</Label>
                     <Select>
                       <SelectTrigger id="okr">
@@ -237,6 +224,29 @@ export default function ActionPlansContent() {
                         <SelectItem value="matematica">Melhorar desempenho em Matemática</SelectItem>
                         <SelectItem value="evasao">Reduzir evasão escolar</SelectItem>
                         <SelectItem value="pais">Aumentar participação dos pais</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="committee-info">Comitê</Label>
+                    <div className="p-3 bg-slate-50 border rounded-md">
+                      <div className="text-sm font-medium">Comitê de Qualidade Educacional</div>
+                      <div className="text-xs text-muted-foreground mt-1">
+                        Herdado do OKR selecionado
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="responsible">Responsável</Label>
+                    <Select>
+                      <SelectTrigger id="responsible">
+                        <SelectValue placeholder="Selecione um membro do comitê" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="maria">Maria Silva (Diretora)</SelectItem>
+                        <SelectItem value="joao">João Santos (Coord. Pedagógico)</SelectItem>
+                        <SelectItem value="ana">Ana Oliveira (Prof. Matemática)</SelectItem>
+                        <SelectItem value="carlos">Carlos Mendes (Prof. Português)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -1045,10 +1055,13 @@ export default function ActionPlansContent() {
                       <span className="font-medium">Título:</span> {selectedRevisionPlan.title}
                     </p>
                     <p>
-                      <span className="font-medium">Responsável:</span> {selectedRevisionPlan.responsible}
+                      <span className="font-medium">OKR:</span> {selectedRevisionPlan.okr}
                     </p>
                     <p>
-                      <span className="font-medium">OKR:</span> {selectedRevisionPlan.okr}
+                      <span className="font-medium">Comitê:</span> Comitê de Qualidade Educacional
+                    </p>
+                    <p>
+                      <span className="font-medium">Responsável:</span> {selectedRevisionPlan.responsible}
                     </p>
                   </div>
                 </div>

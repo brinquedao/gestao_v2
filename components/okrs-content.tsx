@@ -325,6 +325,20 @@ export default function OKRsContent() {
                   </div>
 
                   <div className="grid gap-2">
+                    <Label htmlFor="bulk-committee">Comitê Responsável</Label>
+                    <Select>
+                      <SelectTrigger id="bulk-committee">
+                        <SelectValue placeholder="Selecione um comitê" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="qualidade">Comitê de Qualidade Educacional</SelectItem>
+                        <SelectItem value="projetos">Comitê de Gestão de Projetos</SelectItem>
+                        <SelectItem value="avaliacao">Comitê de Avaliação e Resultados</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="grid gap-2">
                     <Label htmlFor="bulk-data-source">Fonte de Dados da Métrica</Label>
                     <Select>
                       <SelectTrigger id="bulk-data-source">
@@ -430,15 +444,29 @@ export default function OKRsContent() {
                       </div>
                     </div>
                     <div className="grid gap-2">
+                      <Label htmlFor="committee">Comitê Responsável</Label>
+                      <Select>
+                        <SelectTrigger id="committee">
+                          <SelectValue placeholder="Selecione um comitê" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="qualidade">Comitê de Qualidade Educacional</SelectItem>
+                          <SelectItem value="projetos">Comitê de Gestão de Projetos</SelectItem>
+                          <SelectItem value="avaliacao">Comitê de Avaliação e Resultados</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="grid gap-2">
                       <Label htmlFor="responsible">Responsável</Label>
                       <Select>
                         <SelectTrigger id="responsible">
-                          <SelectValue placeholder="Selecione um responsável" />
+                          <SelectValue placeholder="Primeiro selecione um comitê" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="maria">Maria Silva</SelectItem>
                           <SelectItem value="joao">João Santos</SelectItem>
                           <SelectItem value="ana">Ana Oliveira</SelectItem>
+                          <SelectItem value="carlos">Carlos Mendes</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
