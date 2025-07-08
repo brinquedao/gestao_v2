@@ -233,6 +233,100 @@ export default function OKRsContent() {
         okrId === "leitura" && userType === "escola"
           ? "O OKR apresenta objetivos válidos, porém faltam detalhes sobre a metodologia a ser aplicada e os indicadores de acompanhamento são insuficientes. Sugerimos: 1) Definir metodologias específicas para melhoria da leitura; 2) Estabelecer marcos intermediários de avaliação; 3) Incluir estratégias de engajamento dos alunos. Por favor, revise e reenvie com essas melhorias."
           : undefined,
+      actionPlans:
+        okrId === "matematica"
+          ? [
+              {
+                title: "Programa de monitoria em Matemática",
+                description: "Implementar um programa de monitoria onde alunos com melhor desempenho auxiliam colegas com dificuldades em horário de contraturno.",
+                responsible: "Maria Silva",
+                deadline: "30/06/2024",
+                status: "Concluído",
+                progress: 100,
+                lastUpdate: "25/06/2024",
+                nextSteps: "Avaliar resultados e expandir para outras disciplinas"
+              },
+              {
+                title: "Capacitação em metodologias ativas",
+                description: "Capacitar professores de matemática em metodologias ativas como gamificação e aprendizagem baseada em projetos.",
+                responsible: "Ana Costa",
+                deadline: "15/07/2024",
+                status: "Em andamento",
+                progress: 75,
+                lastUpdate: "10/07/2024",
+                nextSteps: "Finalizar módulo de gamificação e aplicar em sala de aula"
+              },
+              {
+                title: "Sistema de acompanhamento individual",
+                description: "Criar sistema de acompanhamento individual para alunos com dificuldades em matemática, com plano personalizado de estudos.",
+                responsible: "Carlos Mendes",
+                deadline: "20/08/2024",
+                status: "Avaliação por pares",
+                progress: 30,
+                lastUpdate: "05/07/2024",
+                nextSteps: "Aguardar aprovação para implementar sistema"
+              }
+            ]
+          : okrId === "evasao"
+            ? [
+                {
+                  title: "Programa de acompanhamento de frequência",
+                  description: "Implementar um sistema de acompanhamento diário de frequência com contato imediato aos pais em caso de ausência.",
+                  responsible: "João Santos",
+                  deadline: "15/07/2024",
+                  status: "Em andamento",
+                  progress: 65,
+                  lastUpdate: "12/07/2024",
+                  nextSteps: "Finalizar integração com sistema de mensagens para pais"
+                },
+                {
+                  title: "Programa de mentoria estudantil",
+                  description: "Criar programa onde alunos do ensino médio orientam estudantes do fundamental em risco de evasão.",
+                  responsible: "Ana Oliveira",
+                  deadline: "30/08/2024",
+                  status: "Em andamento",
+                  progress: 40,
+                  lastUpdate: "08/07/2024",
+                  nextSteps: "Treinar alunos mentores e iniciar acompanhamento"
+                }
+              ]
+            : okrId === "participacao"
+              ? [
+                  {
+                    title: "Reuniões bimestrais com pais",
+                    description: "Organizar reuniões bimestrais com os pais para apresentar o desempenho dos alunos e discutir estratégias de melhoria.",
+                    responsible: "Ana Oliveira",
+                    deadline: "15/05/2024",
+                    status: "Concluído",
+                    progress: 100,
+                    lastUpdate: "15/05/2024",
+                    nextSteps: "Manter periodicidade e expandir para reuniões online"
+                  },
+                  {
+                    title: "Sistema de comunicação digital",
+                    description: "Implementar aplicativo para comunicação direta entre escola e pais, com acompanhamento de notas e frequência.",
+                    responsible: "Roberto Silva",
+                    deadline: "30/06/2024",
+                    status: "Concluído",
+                    progress: 100,
+                    lastUpdate: "28/06/2024",
+                    nextSteps: "Treinar pais para usar o aplicativo efetivamente"
+                  }
+                ]
+              : okrId === "leitura"
+                ? [
+                    {
+                      title: "Programa de leitura compartilhada",
+                      description: "Implementar programa onde pais e filhos leem juntos em casa, com acompanhamento semanal da escola.",
+                      responsible: "Carlos Mendes",
+                      deadline: "31/08/2024",
+                      status: "Reprovado",
+                      progress: 0,
+                      lastUpdate: "10/06/2024",
+                      nextSteps: "Revisar metodologia conforme feedback da GPA"
+                    }
+                  ]
+                : [],
     }
 
     setSelectedOkr(okrData)
@@ -1159,6 +1253,88 @@ export default function OKRsContent() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Planos de Ação Vinculados</h3>
+                  <div className="space-y-4">
+                    {selectedOkr.actionPlans && selectedOkr.actionPlans.length > 0 ? (
+                      selectedOkr.actionPlans.map((plan, index) => (
+                        <div key={index} className="border rounded-lg p-4 bg-slate-50">
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="flex-1">
+                              <h4 className="font-medium">{plan.title}</h4>
+                              <div className="flex items-center gap-2 mt-1">
+                                <Badge
+                                  variant="outline"
+                                  className={
+                                    plan.status === "Concluído"
+                                      ? "bg-green-50 text-green-700"
+                                      : plan.status === "Em andamento"
+                                        ? "bg-amber-50 text-amber-700"
+                                        : plan.status === "Reprovado"
+                                          ? "bg-red-50 text-red-700"
+                                          : "bg-blue-50 text-blue-700"
+                                  }
+                                >
+                                  {plan.status === "Concluído" && <CheckCircle2 className="mr-1 h-3 w-3" />}
+                                  {plan.status === "Em andamento" && <Clock className="mr-1 h-3 w-3" />}
+                                  {plan.status === "Reprovado" && <X className="mr-1 h-3 w-3" />}
+                                  {plan.status === "Avaliação por pares" && <AlertCircle className="mr-1 h-3 w-3" />}
+                                  {plan.status}
+                                </Badge>
+                                <Badge variant="outline" className="text-xs">
+                                  {plan.progress}%
+                                </Badge>
+                              </div>
+                            </div>
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-3">{plan.description}</p>
+
+                          <div className="grid grid-cols-2 gap-4 text-sm mb-3">
+                            <div>
+                              <span className="font-medium">Responsável:</span>
+                              <p>{plan.responsible}</p>
+                            </div>
+                            <div>
+                              <span className="font-medium">Prazo:</span>
+                              <p>{plan.deadline}</p>
+                            </div>
+                          </div>
+
+                          <div className="mb-2">
+                            <div className="flex items-center justify-between text-xs mb-1">
+                              <span>Progresso do Plano</span>
+                              <span>{plan.progress}%</span>
+                            </div>
+                            <ColoredProgress
+                              value={plan.progress}
+                              showValue={false}
+                              size="sm"
+                            />
+                          </div>
+
+                          {plan.lastUpdate && (
+                            <div className="text-xs text-muted-foreground">
+                              <span className="font-medium">Última atualização:</span> {plan.lastUpdate}
+                            </div>
+                          )}
+
+                          {plan.nextSteps && (
+                            <div className="mt-2 text-xs">
+                              <span className="font-medium">Próximos passos:</span>
+                              <p className="text-muted-foreground mt-1">{plan.nextSteps}</p>
+                            </div>
+                          )}
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-8 text-muted-foreground">
+                        <p>Nenhum plano de ação vinculado a este OKR ainda.</p>
+                        <p className="text-xs mt-1">Crie planos de ação para atingir os resultados-chave.</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
