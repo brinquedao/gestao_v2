@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import {
   AlertCircle,
+  AlertTriangle,
   CheckCircle2,
   ChevronDown,
   Clock,
@@ -794,7 +795,7 @@ export default function OKRsContent() {
                         <TableCell>-</TableCell>
                         <TableCell>
                           <div className="flex items-center">
-                            <X className="mr-1 h-4 w-4 text-red-500" />
+                            <AlertTriangle className="mr-1 h-4 w-4 text-red-500" />
                             <span className="text-xs">Reprovado</span>
                           </div>
                         </TableCell>
@@ -881,6 +882,33 @@ export default function OKRsContent() {
 
         <TabsContent value="board" className="space-y-4">
           <div className="grid gap-6 md:grid-cols-4">
+            {userType === "escola" && (
+              <Card>
+                <CardHeader className="bg-red-50 pb-3">
+                  <CardTitle className="text-red-700">Reprovados</CardTitle>
+                  <CardDescription>1 OKR</CardDescription>
+                </CardHeader>
+                <CardContent className="p-3">
+                  <div className="space-y-3">
+                    <div className="rounded-lg border p-3 shadow-sm">
+                      <h3 className="font-semibold">Melhorar habilidades de leitura</h3>
+                      <div className="mt-2 text-sm text-muted-foreground">
+                        <div className="flex items-center justify-between mb-1">
+                          <span>Feedback da GPA disponível</span>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between text-xs">
+                        <span>Carlos Mendes</span>
+                        <Button variant="outline" size="sm">
+                          Ver feedback
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             <Card>
               <CardHeader className="bg-amber-50 pb-3">
                 <CardTitle className="text-amber-700">Em Andamento</CardTitle>
@@ -919,6 +947,31 @@ export default function OKRsContent() {
               </CardContent>
             </Card>
 
+            {userType === "escola" && (
+              <Card>
+                <CardHeader className="bg-blue-50 pb-3">
+                  <CardTitle className="text-blue-700">Em Avaliação</CardTitle>
+                  <CardDescription>1 OKR</CardDescription>
+                </CardHeader>
+                <CardContent className="p-3">
+                  <div className="space-y-3">
+                    <div className="rounded-lg border p-3 shadow-sm">
+                      <h3 className="font-semibold">Implementar programa de mentoria</h3>
+                      <div className="mt-2 text-sm text-muted-foreground">
+                        <div className="flex items-center justify-between mb-1">
+                          <span>Aguardando validação da GPA</span>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between text-xs">
+                        <span>Roberto Lima</span>
+                        <span>Enviado: 15/05/2024</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             <Card>
               <CardHeader className="bg-green-50 pb-3">
                 <CardTitle className="text-green-700">Concluídos</CardTitle>
@@ -942,58 +995,6 @@ export default function OKRsContent() {
                 </div>
               </CardContent>
             </Card>
-
-            {userType === "escola" && (
-              <>
-                <Card>
-                  <CardHeader className="bg-blue-50 pb-3">
-                    <CardTitle className="text-blue-700">Em Avaliação</CardTitle>
-                    <CardDescription>1 OKR</CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-3">
-                    <div className="space-y-3">
-                      <div className="rounded-lg border p-3 shadow-sm">
-                        <h3 className="font-semibold">Implementar programa de mentoria</h3>
-                        <div className="mt-2 text-sm text-muted-foreground">
-                          <div className="flex items-center justify-between mb-1">
-                            <span>Aguardando validação da GPA</span>
-                          </div>
-                        </div>
-                        <div className="mt-3 flex items-center justify-between text-xs">
-                          <span>Roberto Lima</span>
-                          <span>Enviado: 15/05/2024</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader className="bg-red-50 pb-3">
-                    <CardTitle className="text-red-700">Reprovados</CardTitle>
-                    <CardDescription>1 OKR</CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-3">
-                    <div className="space-y-3">
-                      <div className="rounded-lg border p-3 shadow-sm">
-                        <h3 className="font-semibold">Melhorar habilidades de leitura</h3>
-                        <div className="mt-2 text-sm text-muted-foreground">
-                          <div className="flex items-center justify-between mb-1">
-                            <span>Feedback da GPA disponível</span>
-                          </div>
-                        </div>
-                        <div className="mt-3 flex items-center justify-between text-xs">
-                          <span>Carlos Mendes</span>
-                          <Button variant="outline" size="sm">
-                            Ver feedback
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </>
-            )}
 
             {userType === "gpa" && (
               <Card>
@@ -1186,7 +1187,7 @@ export default function OKRsContent() {
               <div className="space-y-4 py-4">
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                   <div className="flex items-start gap-3">
-                    <X className="h-5 w-5 text-red-500 mt-0.5" />
+                    <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5" />
                     <div>
                       <h3 className="font-medium text-red-800 mb-2">OKR Reprovado</h3>
                       <p className="text-sm text-red-700">{selectedOkr.feedback}</p>
